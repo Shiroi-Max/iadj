@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AgentNPC : Agent
-{ 
+{
     // Este será el steering final que se aplique al personaje.
     [SerializeField] protected Steering steer;
     // Todos los steering que tiene que calcular el agente.
@@ -13,6 +13,7 @@ public class AgentNPC : Agent
     protected void Awake()
     {
         this.steer = new Steering();
+        listSteerings = new List<SteeringBehaviour>();
 
         // Construye una lista con todos las componenen del tipo SteeringBehaviour.
         // La llamaremos listSteerings
