@@ -10,13 +10,17 @@ public class AgentNPC : Agent
     private List<SteeringBehaviour> listSteerings;
 
 
-    protected  void Awake()
+    protected void Awake()
     {
         this.steer = new Steering();
 
         // Construye una lista con todos las componenen del tipo SteeringBehaviour.
         // La llamaremos listSteerings
         // Puedes usar GetComponents<>()
+        foreach (SteeringBehaviour st in GetComponents(typeof(SteeringBehaviour)))
+        {
+            listSteerings.Add(st);
+        }
     }
 
 
@@ -44,6 +48,18 @@ public class AgentNPC : Agent
         // Rotation
         // Position
         // Orientation
+        Acceleration = Vector3.zero; // cambia este valor si steer son aceleraciones
+        Velocity = this.steer.linear; // steer se interpreta como velocidades.
+        Rotation = this.steer.angular; // Aplicamos Newton-Euler para a=0
+        Position += Velocity * deltaTime; // Si steer fueran aceleraciones
+        Orientation += Rotation * deltaTime; // deberás cambiar las expresiones.
+        // Pasar los valores Position y Orientation a Unity.
+        // Posición no es necesario. Ver observación final.
+        transform.rotation = new Quaternion(); //Quaternion.identity;
+        transform.Rotate(Vector3.up, Orientation);
+        // Ni se te ocurra usar cuaterniones para la rotación.
+        // Aquí tienes la solución sin cuaterniones.
+
     }
 
 
@@ -56,8 +72,8 @@ public class AgentNPC : Agent
         this.steer = new Steering();
 
         // Recorremos cada steering
-        //foreach (SteeringBehaviour behavior in listSteerings)
-        //    Steering kinematic = behavior.GetSteering(this);
+        foreach (SteeringBehaviour behavior in listSteerings)
+            kinematicFinal = behavior.GetSteering(this);
         //// La cinemática de este SteeringBehaviour se tiene que combinar
         //// con las cinemáticas de los demás SteeringBehaviour.
         //// Debes usar kinematic con el árbitro desesado para combinar todos

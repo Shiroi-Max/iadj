@@ -17,7 +17,7 @@ public class AgentPlayer : Agent
 
         Vector3 Velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-        // Velocity *= MaxSpeed;  // DESCOMENTA !!
+        Velocity *= MaxSpeed;
         Vector3 translation = Velocity * Time.deltaTime;
         transform.Translate(translation, Space.World);
 
@@ -25,7 +25,7 @@ public class AgentPlayer : Agent
         // que ya lleva implementado Unity.
         // Notar que al jugador le aplicamos un movimiento no-acelerado.
         transform.LookAt(transform.position + Velocity);
-        // Orientation = transform.rotation.eulerAngles.y; // DESCOMENTA !!
+        Orientation = transform.rotation.eulerAngles.y;
     }
 
 }
