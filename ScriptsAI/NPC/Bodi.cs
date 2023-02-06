@@ -42,10 +42,10 @@ public class Bodi : MonoBehaviour
     }
     public Vector3 Velocity
     {
-        get{ return _velocity; }
+        get { return _velocity; }
         set
         {
-            if (value.magnitude <= .1) _velocity = new Vector3(0,0,0);
+            if (value.magnitude <= .1) _velocity = new Vector3(0, 0, 0);
             else _velocity = value;
         }
     }
@@ -57,7 +57,7 @@ public class Bodi : MonoBehaviour
     public float Rotation
     {
         get { return _rotation; }
-        set 
+        set
         {
             if (value <= .1) _rotation = 0;
             else _rotation = value;
@@ -71,19 +71,19 @@ public class Bodi : MonoBehaviour
     public Vector3 Acceleration
     {
         get { return _acceleration; }
-        set 
+        set
         {
-            if (value <= .1) _acceleration = new Vector3(0, 0, 0);
+            if (value.magnitude <= .1) _acceleration = new Vector3(0, 0, 0);
             else _acceleration = value;
         }
     }
     public float AngularAcc
     {
-        get { return _angularAcc}
-        set 
-        {   
+        get { return _angularAcc; }
+        set
+        {
             if (value <= .1) _angularAcc = 0;
-            else _angularAcc = value; 
+            else _angularAcc = value;
         }
     }
     // public Vector3 Position. Recuerda. Esta es la única propiedad que trabaja sobre transform.
@@ -101,11 +101,12 @@ public class Bodi : MonoBehaviour
     public float Speed
     {
         get { return _speed; }
-        set 
-        { 
+        set
+        {
             if (value <= .1) _speed = 0;
             else _speed = value;
         }
+    }
 
     // TE PUEDEN INTERESAR LOS SIGUIENTES MÉTODOS.
     // Añade todos los que sean referentes a la parte física.
