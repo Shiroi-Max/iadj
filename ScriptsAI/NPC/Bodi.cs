@@ -42,24 +42,50 @@ public class Bodi : MonoBehaviour
     }
     public Vector3 Velocity
     {
-        get
-        {
-            if (_velocity == null)
-                return new Vector3();
-            else
-                return new Vector3(_velocity);
-        }
+        get{ return _velocity; }
         set
         {
-            if (value.magnitude() <= .1) _velocity = new Vector3();
-            else _velocity = new Vector3(value);
+            if (value.magnitude <= .1) _velocity = new Vector3(0,0,0);
+            else _velocity = value;
         }
     }
-    // public float MaxRotation
-    // public float Rotation. 
-    // public float MaxAcceleration
-    // public Vector3 Acceleration
-    // public float AngularAcc
+    public float MaxRotation
+    {
+        get { return _maxRotation; }
+        set { _maxRotation = Mathf.Max(0, value); }
+    }
+    public float Rotation
+    {
+        get { return _rotation; }
+        set 
+        {
+            if (value <= .1) _rotation = 0;
+            else _rotation = value;
+        }
+    }
+    public float MaxAcceleration
+    {
+        get { return _maxAcceleration; }
+        set { _maxAcceleration = Mathf.Max(0, value); }
+    }
+    public Vector3 Acceleration
+    {
+        get { return _acceleration; }
+        set 
+        {
+            if (value <= .1) _acceleration = new Vector3(0, 0, 0);
+            else _acceleration = value;
+        }
+    }
+    public float AngularAcc
+    {
+        get { return _angularAcc}
+        set 
+        {   
+            if (value <= .1) _angularAcc = 0;
+            else _angularAcc = value; 
+        }
+    }
     // public Vector3 Position. Recuerda. Esta es la única propiedad que trabaja sobre transform.
     public Vector3 Position
     {
@@ -67,8 +93,19 @@ public class Bodi : MonoBehaviour
         set { transform.position = value; }
     }
 
-    // public float Orientation
-    // public float Speed  
+    public float Orientation
+    {
+        get { return _orientation; }
+        set { _orientation = value; }
+    }
+    public float Speed
+    {
+        get { return _speed; }
+        set 
+        { 
+            if (value <= .1) _speed = 0;
+            else _speed = value;
+        }
 
     // TE PUEDEN INTERESAR LOS SIGUIENTES MÉTODOS.
     // Añade todos los que sean referentes a la parte física.
