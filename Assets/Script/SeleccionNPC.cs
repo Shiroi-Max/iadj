@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SeleccionNPC : MonoBehaviour
 {
-    public ArrayList selectedUnits; 
+    public ArrayList selectedUnits;
+    public Agent npcVirtual;
 
     // Start is called before the first frame update
     void Start()
@@ -15,43 +16,46 @@ public class SeleccionNPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hitInfo;
 
-            if (Physics.Raycast(ray, out hitInfo))
+            if (Physics.Raycast(ray, out hitInfo) && hitInfo.collider != null)
             {
-                if (hitInfo.collider != null && hitInfo.collider.CompareTag("NPC"))
+                if (hitInfo.collider.CompareTag("NPC"))
                 {
                     GameObject npc = hitInfo.transform.gameObject;
-                    if(!Input.GetKey(KeyCode.LeftShift))
+                    if (!Input.GetKey(KeyCode.LeftShift))
                     {
                         deseleccionarTodos();
-                        npc.SendMessage("selected");
+                        npc.SendMessage("Selected");
                         selectedUnits.Add(npc);
-                    }else if(!selectedUnits.Contains(npc)){
-                        npc.SendMessage("selected");
+                    }
+                    else if (!selectedUnits.Contains(npc))
+                    {
+                        npc.SendMessage("Selected");
                         selectedUnits.Add(npc);
                     }
                 }
+                else
+                if (hitInfo.collider.CompareTag("Terrain") && selectedUnits.Count > 0)
+                {
+                    Agent v = Instantiate(npcVirtual);
+                    v.transform.localPosition = hitInfo.point;
+
+                    foreach (GameObject npc in selectedUnits)
+                        npc.SendMessage("NewTarget", v);
+                }
             }
-
-            if( hitInfo.collider != null && hitInfo.collider.CompareTag("Terraiin"))
-
         }
 
-            
-    }
-
-    void deseleccionarTodos()
-    {
-        foreach (GameObject npc in selectedUnits)
+        void deseleccionarTodos()
         {
-            npc.SendMessage("deselected");
+            foreach (GameObject npc in selectedUnits)
+                npc.SendMessage("Deselected");
+            selectedUnits.Clear();
         }
-        selectedUnits.Clear();
     }
 }

@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class Seek : SteeringBehaviour
 {
-
-    // Declara las variables que necesites para este SteeringBehaviour
-    public Agent target;
-
     void Start()
     {
-        this.nameSteering = "Pon su nombre";
+        this.nameSteering = "Seek";
     }
 
 
@@ -18,9 +14,17 @@ public class Seek : SteeringBehaviour
     {
         Steering steer = new Steering();
         // Calcula el steering.
-        Vector3 v = target.Position - agent.Position;
-        v = v.normalized * agent.MaxAcceleration;
-        steer.linear = v;
+        if (target != null)
+        {
+            Vector3 v = target.Position - agent.Position;
+            v = v.normalized * agent.MaxAcceleration;
+            steer.linear = v;
+        }
+        else
+        {
+            steer.linear = Vector3.zero;
+
+        }
         steer.angular = 0;
         // Retornamos el resultado final.
         return steer;
