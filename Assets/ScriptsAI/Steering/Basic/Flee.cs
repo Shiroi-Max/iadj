@@ -21,8 +21,7 @@ public class Flee : SteeringBehaviour
             Vector3 direction = agent.Position - target.Position;
             if (direction.magnitude < fleeRange)
             {
-                direction = direction.normalized * agent.MaxAcceleration;
-                steer.linear = direction;
+                steer.linear = direction.normalized * agent.MaxAcceleration;
                 return steer;
             }
         }

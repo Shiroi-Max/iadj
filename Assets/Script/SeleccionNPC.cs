@@ -42,19 +42,21 @@ public class SeleccionNPC : MonoBehaviour
                 else
                 if (hitInfo.collider.CompareTag("Terrain") && selectedUnits.Count > 0)
                 {
-                    Agent v = Instantiate(npcVirtual);
-                    v.transform.localPosition = hitInfo.point;
+                    Agent npc = Instantiate(npcVirtual);
+                    Vector3 v = hitInfo.point;
+                    v.y = 0;
+                    npc.transform.localPosition = v;
 
-                    foreach (GameObject npc in selectedUnits)
-                        npc.SendMessage("NewTarget", v);
+                    foreach (GameObject unit in selectedUnits)
+                        unit.SendMessage("NewTarget", npc);
                 }
             }
         }
 
         void deseleccionarTodos()
         {
-            foreach (GameObject npc in selectedUnits)
-                npc.SendMessage("Deselected");
+            foreach (GameObject unit in selectedUnits)
+                unit.SendMessage("Deselected");
             selectedUnits.Clear();
         }
     }

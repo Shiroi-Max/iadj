@@ -17,8 +17,7 @@ public class Seek : SteeringBehaviour
         if (target != null)
         {
             Vector3 direction = target.Position - agent.Position;
-            direction = direction.normalized * agent.MaxAcceleration;
-            steer.linear = direction;
+            steer.linear = direction.normalized * agent.MaxAcceleration;
             return steer;
         }
 

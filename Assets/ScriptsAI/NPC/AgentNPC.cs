@@ -74,7 +74,8 @@ public class AgentNPC : Agent
 
         // Recorremos cada steering
         foreach (SteeringBehaviour behavior in listSteerings)
-            kinematicFinal = behavior.GetSteering(this);
+            if (behavior.enabled)
+                kinematicFinal = behavior.GetSteering(this);
         //// La cinemática de este SteeringBehaviour se tiene que combinar
         //// con las cinemáticas de los demás SteeringBehaviour.
         //// Debes usar kinematic con el árbitro desesado para combinar todos
