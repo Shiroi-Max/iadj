@@ -2,25 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fle : SteeringBehaviour
+public class Flee : SteeringBehaviour
 {
+    public float fleeRange = 5;
 
-    // Declara las variables que necesites para este SteeringBehaviour
-
-    
     void Start()
     {
-        this.nameSteering = "Pon su nombre";
+        this.nameSteering = "Flee";
     }
-
 
     public override Steering GetSteering(Agent agent)
     {
         Steering steer = new Steering();
+        steer.angular = 0;
 
-        // Calcula el steering.
+        if (target != null)
+        {
+            Vector3 direction = agent.Position - target.Position;
+            if (direction.magnitude < fleeRange)
+            {
+                direction = direction.normalized * agent.MaxAcceleration;
+                steer.linear = direction;
+                return steer;
+            }
+        }
 
-        // Retornamos el resultado final.
+        steer.linear = Vector3.zero;
         return steer;
     }
 }
