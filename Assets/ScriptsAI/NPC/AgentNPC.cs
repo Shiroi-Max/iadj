@@ -9,7 +9,6 @@ public class AgentNPC : Agent
     // Todos los steering que tiene que calcular el agente.
     private List<SteeringBehaviour> listSteerings;
 
-
     protected void Awake()
     {
         this.steer = new Steering();
@@ -23,7 +22,6 @@ public class AgentNPC : Agent
             listSteerings.Add(st);
         }
     }
-
 
     // Use this for initialization
     void Start()
@@ -39,7 +37,6 @@ public class AgentNPC : Agent
 
         // En cada frame podría ejecutar otras componentes IA
     }
-
 
     private void ApplySteering(float deltaTime)
     {
@@ -61,8 +58,6 @@ public class AgentNPC : Agent
         // Ni se te ocurra usar cuaterniones para la rotación.
         // Aquí tienes la solución sin cuaterniones.
     }
-
-
 
     public virtual void LateUpdate()
     {
