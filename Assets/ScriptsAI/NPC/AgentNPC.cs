@@ -60,7 +60,6 @@ public class AgentNPC : Agent
         transform.Rotate(Vector3.up, Orientation);
         // Ni se te ocurra usar cuaterniones para la rotación.
         // Aquí tienes la solución sin cuaterniones.
-
     }
 
 
@@ -85,7 +84,6 @@ public class AgentNPC : Agent
         // A continuación debería entrar a funcionar el actuador para comprobar
         // si la propuesta de movimiento es factible:
         // kinematicFinal = Actuador(kinematicFinal, self)
-
 
         // El resultado final se guarda para ser aplicado en el siguiente frame.
         this.steer = kinematicFinal;

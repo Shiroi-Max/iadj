@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Arrive : SteeringBehaviour
 {
-
-    // Declara las variables que necesites para este SteeringBehaviour
-    public float arriveTime = 5;
+    public float timeToTarget = 5;
 
     void Start()
     {
-        this.nameSteering = "Pon su nombre";
+        this.nameSteering = "Arrive";
     }
 
     public override Steering GetSteering(Agent agent)
@@ -31,7 +29,7 @@ public class Arrive : SteeringBehaviour
                     targetSpeed = agent.MaxSpeed * distance / agent.ArrivalRadius;
 
                 Vector3 targetVelocity = direction.normalized * targetSpeed;
-                steer.linear = (targetVelocity - agent.Velocity) / arriveTime;
+                steer.linear = (targetVelocity - agent.Velocity) / timeToTarget;
 
                 if (steer.linear.magnitude > agent.MaxAcceleration)
                     steer.linear = steer.linear.normalized * agent.MaxAcceleration;

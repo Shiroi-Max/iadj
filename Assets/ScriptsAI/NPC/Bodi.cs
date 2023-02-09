@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class Bodi : MonoBehaviour
 {
@@ -30,43 +31,30 @@ public class Bodi : MonoBehaviour
 
     // CONSTRUYE LAS PROPIEDADES SIGUENTES. PUEDES CAMBIAR LOS NOMBRE A TU GUSTO
     // Lo importante es controlar el set
-    public float MaxForce
-    {
-        get { return _maxForce; }
-        set { _maxForce = Mathf.Max(0, value); }
-    }
     public float MaxSpeed
     {
         get { return _maxSpeed; }
         set { _maxSpeed = Mathf.Max(0, value); }
-    }
-    public Vector3 Velocity
-    {
-        get { return _velocity; }
-        set
-        {
-            if (value.magnitude <= .1) _velocity = new Vector3(0, 0, 0);
-            else _velocity = value;
-        }
     }
     public float MaxRotation
     {
         get { return _maxRotation; }
         set { _maxRotation = Mathf.Max(0, value); }
     }
-    public float Rotation
-    {
-        get { return _rotation; }
-        set
-        {
-            if (value <= .1) _rotation = 0;
-            else _rotation = value;
-        }
-    }
     public float MaxAcceleration
     {
         get { return _maxAcceleration; }
         set { _maxAcceleration = Mathf.Max(0, value); }
+    }
+    public float MaxAngularAcc
+    {
+        get { return _maxAngularAcc; }
+        set { _maxAngularAcc = Mathf.Max(0, value); }
+    }
+    public float MaxForce
+    {
+        get { return _maxForce; }
+        set { _maxForce = Mathf.Max(0, value); }
     }
     public Vector3 Acceleration
     {
@@ -86,17 +74,23 @@ public class Bodi : MonoBehaviour
             else _angularAcc = value;
         }
     }
-    // public Vector3 Position. Recuerda. Esta es la única propiedad que trabaja sobre transform.
-    public Vector3 Position
+    public Vector3 Velocity
     {
-        get { return transform.position; }
-        set { transform.position = value; }
+        get { return _velocity; }
+        set
+        {
+            if (value.magnitude <= .1) _velocity = new Vector3(0, 0, 0);
+            else _velocity = value;
+        }
     }
-
-    public float Orientation
+    public float Rotation
     {
-        get { return _orientation; }
-        set { _orientation = value; }
+        get { return _rotation; }
+        set
+        {
+            if (value <= .1) _rotation = 0;
+            else _rotation = value;
+        }
     }
     public float Speed
     {
@@ -107,14 +101,31 @@ public class Bodi : MonoBehaviour
             else _speed = value;
         }
     }
+    public Vector3 Position
+    {
+        get { return transform.position; }
+        set { transform.position = value; }
+    }
+    public float Orientation
+    {
+        get { return _orientation; }
+        set { _orientation = value; }
+    }
 
     // TE PUEDEN INTERESAR LOS SIGUIENTES MÉTODOS.
     // Añade todos los que sean referentes a la parte física.
 
     // public float Heading()
     //      Retorna el ángulo heading en (-180, 180) en grado o radianes. Lo que consideres
-    // public static float MapToRange(float rotation, Range r)
-    //      Retorna un ángulo de (-180, 180) a (0, 360) expresado en grado or radianes
+    public static float MapToRange(float rotation, Range r)
+    {
+        float min = r.from;
+        float max = min + r.count;
+        if (rotation < max)
+            return rotation;
+        return rotation - max + min;
+    }
+
     // public float MapToRange(Range r)
     //      Retorna la orientación de este bodi, un ángulo de (-180, 180), a (0, 360) expresado en grado or radianes
     // public float PositionToAngle()
