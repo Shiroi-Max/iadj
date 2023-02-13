@@ -111,7 +111,6 @@ GameObject:
   - component: {fileID: 8953653622161247072}
   - component: {fileID: 8953653622161247079}
   - component: {fileID: 8953653622161247078}
-  - component: {fileID: 8953653622161247075}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -220,17 +219,3 @@ MonoBehaviour:
   _arrivalRadius: 3
   _interiorAngle: 3
   _exteriorAngle: 8
---- !u!114 &8953653622161247075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8953653622161247077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58b9bd48d46400a448b6c862363a01df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  marcador: {fileID: 2085874657062927584, guid: 5f10e7c89da760f45b6e195c8913690b,
-    type: 3}

@@ -21,6 +21,7 @@ public class Align : SteeringBehaviour
         {
             float rotation = target.Orientation - agent.Orientation;
             rotation = Bodi.MapToRange(rotation, new Range(-180, 360));
+            
             float rotationSize = Mathf.Abs(rotation);
             if (rotationSize >= target.InteriorAngle)
             {
@@ -29,8 +30,9 @@ public class Align : SteeringBehaviour
                     targetRotation = agent.MaxRotation;
                 else
                     targetRotation = agent.MaxRotation * rotationSize / target.ExteriorAngle;
-
+                
                 targetRotation *= rotation / rotationSize;
+
                 steer.angular = (targetRotation - agent.Rotation) / timeToTarget;
                 float angularAcc = Mathf.Abs(steer.angular);
 

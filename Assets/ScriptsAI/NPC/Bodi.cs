@@ -61,7 +61,7 @@ public class Bodi : MonoBehaviour
         get { return _acceleration; }
         set
         {
-            if (value.magnitude <= .1) _acceleration = new Vector3(0, 0, 0);
+            if (Mathf.Abs(value.magnitude) <= .1) _acceleration = new Vector3(0, 0, 0);
             else _acceleration = value;
         }
     }
@@ -70,7 +70,7 @@ public class Bodi : MonoBehaviour
         get { return _angularAcc; }
         set
         {
-            if (value <= .1) _angularAcc = 0;
+            if (Mathf.Abs(value) <= .1) _angularAcc = 0;
             else _angularAcc = value;
         }
     }
@@ -79,7 +79,7 @@ public class Bodi : MonoBehaviour
         get { return _velocity; }
         set
         {
-            if (value.magnitude <= .1) _velocity = new Vector3(0, 0, 0);
+            if (Mathf.Abs(value.magnitude) <= .1) _velocity = new Vector3(0, 0, 0);
             else _velocity = value;
         }
     }
@@ -88,7 +88,7 @@ public class Bodi : MonoBehaviour
         get { return _rotation; }
         set
         {
-            if (value <= .1) _rotation = 0;
+            if (Mathf.Abs(value) <= .1) _rotation = 0;
             else _rotation = value;
         }
     }
@@ -97,7 +97,7 @@ public class Bodi : MonoBehaviour
         get { return _speed; }
         set
         {
-            if (value <= .1) _speed = 0;
+            if (Mathf.Abs(value) <= .1) _speed = 0;
             else _speed = value;
         }
     }

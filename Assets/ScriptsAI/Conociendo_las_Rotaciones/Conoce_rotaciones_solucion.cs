@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rotacion : MonoBehaviour
+public class Conoce_rotaciones_solucion : MonoBehaviour
 {
     public float valor = 0;
 
@@ -13,7 +13,7 @@ public class Rotacion : MonoBehaviour
 
         // transform.rotation = Quaternion.Euler(0, valor, 0);
 
-        // transform.rotation = new Quaternion(); //Quaternion.identity;
-        // transform.Rotate(Vector3.up, valor);
+        transform.rotation = new Quaternion(); //Quaternion.identity;
+        transform.Rotate(Vector3.up, valor);
     }
 }
