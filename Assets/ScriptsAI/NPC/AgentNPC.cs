@@ -51,10 +51,9 @@ public class AgentNPC : Agent
         Position = Position + Velocity * deltaTime; // Si steer fueran aceleraciones
         Orientation = Orientation + Rotation * deltaTime; // deberás cambiar las expresiones.
         Velocity = Velocity + Acceleration * deltaTime; // steer se interpreta como velocidades.
-        Rotation = Rotation + AngularAcc * deltaTime; // Aplicamos Newton-Euler para a=0
+        Rotation = Rotation + AngularAcc * deltaTime; // Aplicamos Newton-Euler para a=
         // Pasar los valores Position y Orientation a Unity.
         // Posición no es necesario. Ver observación final.
-        Debug.Log(this.steer.angular);
         transform.rotation = new Quaternion(); //Quaternion.identity;
         transform.Rotate(Vector3.up, Orientation);
         // Ni se te ocurra usar cuaterniones para la rotación.

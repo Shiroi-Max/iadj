@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class AntiAlign : SteeringBehaviour
 {
+    public Align align;
+    private Agent npcv;
 
-    // Declara las variables que necesites para este SteeringBehaviour
-
-    
     void Start()
     {
-        this.nameSteering = "Pon su nombre";
+        this.nameSteering = "AntiAlign";
     }
 
 
     public override Steering GetSteering(Agent agent)
     {
-        Steering steer = new Steering();
+        if (target == null)
+        {
+            Steering steer = new Steering();
+            return steer;
+        }
 
-        // Calcula el steering.
+        if (npcv == null)
+            npcv = Instantiate(target);
 
-        // Retornamos el resultado final.
-        return steer;
+        npcv.gameObject.SetActive(false);
+        if (target.Orientation > 180)
+            npcv.Orientation = target.Orientation - 180;
+        else
+            npcv.Orientation = target.Orientation + 180;
+
+        align.target = npcv;
+        return align.GetSteering(agent);
     }
 }

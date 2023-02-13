@@ -16,33 +16,31 @@ public class Align : SteeringBehaviour
     public override Steering GetSteering(Agent agent)
     {
         Steering steer = new Steering();
-        steer.linear = Vector3.zero;
-        if (target != null)
+        if (target == null) return steer;
+
+        float rotation = target.Orientation - agent.Orientation;
+        rotation = Bodi.MapToRange(rotation, new Range(-180, 360));
+
+        float rotationSize = Mathf.Abs(rotation);
+        if (rotationSize >= target.InteriorAngle)
         {
-            float rotation = target.Orientation - agent.Orientation;
-            rotation = Bodi.MapToRange(rotation, new Range(-180, 360));
-            
-            float rotationSize = Mathf.Abs(rotation);
-            if (rotationSize >= target.InteriorAngle)
-            {
-                float targetRotation;
-                if (rotationSize > target.ExteriorAngle)
-                    targetRotation = agent.MaxRotation;
-                else
-                    targetRotation = agent.MaxRotation * rotationSize / target.ExteriorAngle;
-                
-                targetRotation *= rotation / rotationSize;
+            float targetRotation;
+            if (rotationSize > target.ExteriorAngle)
+                targetRotation = agent.MaxRotation;
+            else
+                targetRotation = agent.MaxRotation * rotationSize / target.ExteriorAngle;
 
-                steer.angular = (targetRotation - agent.Rotation) / timeToTarget;
-                float angularAcc = Mathf.Abs(steer.angular);
+            targetRotation *= rotation / rotationSize;
 
-                if (angularAcc > agent.MaxAngularAcc)
-                    steer.angular = (steer.angular / angularAcc) * agent.MaxAngularAcc;
+            steer.angular = (targetRotation - agent.Rotation) / timeToTarget;
+            float angularAcc = Mathf.Abs(steer.angular);
 
-                return steer;
-            }
+            if (angularAcc > agent.MaxAngularAcc)
+                steer.angular = (steer.angular / angularAcc) * agent.MaxAngularAcc;
         }
-        steer.angular = 0;
+        else if (Mathf.Abs(agent.Rotation) > .01)
+            steer.angular = agent.Rotation * -1;
+
         return steer;
     }
 }

@@ -12,16 +12,12 @@ public class Seek : SteeringBehaviour
     public override Steering GetSteering(Agent agent)
     {
         Steering steer = new Steering();
-        steer.angular = 0;
 
-        if (target != null)
-        {
-            Vector3 direction = target.Position - agent.Position;
-            steer.linear = direction.normalized * agent.MaxAcceleration;
-            return steer;
-        }
+        if (target == null) return steer;
 
-        steer.linear = Vector3.zero;
+        Vector3 direction = target.Position - agent.Position;
+        steer.linear = direction.normalized * agent.MaxAcceleration;
+
         return steer;
     }
 }
