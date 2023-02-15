@@ -84,4 +84,10 @@ public class AgentNPC : Agent
         // El resultado final se guarda para ser aplicado en el siguiente frame.
         this.steer = kinematicFinal;
     }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, OrientationToVector() + transform.position);
+    }
 }

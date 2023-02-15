@@ -131,7 +131,10 @@ public class Bodi : MonoBehaviour
     //      Retorna la orientación de este bodi, un ángulo de (-180, 180), a (0, 360) expresado en grado or radianes
     // public float PositionToAngle()
     //      Retorna el ángulo de una posición usando el eje Z como el primer eje
-    // public Vector3 OrientationToVector()
+    public Vector3 OrientationToVector()
+    {
+        return new Vector3(-Mathf.Sin(_orientation), 0, Mathf.Cos(_orientation));
+    }
     //      Retorna un vector a partir de una orientación usando Z como primer eje
     // public Vector3 VectorHeading()  // Nombre alternativo
     //      Retorna un vector a partir de una orientación usando Z como primer eje

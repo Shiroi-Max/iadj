@@ -7,12 +7,12 @@ public class Pursue : SteeringBehaviour
     public Seek seek;
     private Agent npcvtemp;
     public Agent npcv;
-    public float maxPrediction = 100;
+    public float maxPrediction = 10;
 
 
     void Start()
     {
-
+        this.nameSteering = "Pursue";
     }
 
     public override Steering GetSteering(Agent agent)

@@ -18,6 +18,7 @@ public class AgentPlayer : Agent
         Vector3 Velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         Velocity *= MaxSpeed;
+        this.Velocity = Velocity;
         Vector3 translation = Velocity * Time.deltaTime;
         transform.Translate(translation, Space.World);
 
