@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pursue : SteeringBehaviour
 {
     public Seek seek;
-    private Agent npcvtemp;
-    public Agent npcv;
+    private Agent npcVirtualTemp;
+    public Agent npcVirtual;
     public float maxPrediction = 10;
-
 
     void Start()
     {
@@ -27,11 +24,11 @@ public class Pursue : SteeringBehaviour
         else
             prediction = distance / speed;
 
-        if (npcvtemp == null)
-            npcvtemp = Instantiate(npcv);
-        npcvtemp.Position = target.Position;
-        npcvtemp.Position += target.Velocity * prediction;
-        seek.target = npcvtemp;
+        if (npcVirtualTemp == null)
+            npcVirtualTemp = Instantiate(npcVirtual);
+        npcVirtualTemp.Position = target.Position;
+        npcVirtualTemp.Position += target.Velocity * prediction;
+        seek.target = npcVirtualTemp;
 
         return seek.GetSteering(agent);
     }

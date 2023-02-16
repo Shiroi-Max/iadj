@@ -6,6 +6,7 @@ public class AgentNPC : Agent
 {
     // Este será el steering final que se aplique al personaje.
     [SerializeField] protected Steering steer;
+    public Arbitrator arbitrator;
     // Todos los steering que tiene que calcular el agente.
     private List<SteeringBehaviour> listSteerings;
 
@@ -66,11 +67,12 @@ public class AgentNPC : Agent
 
         // Reseteamos el steering final.
         this.steer = new Steering();
+        kinematicFinal = arbitrator.getSteering(listSteerings, this);
 
         // Recorremos cada steering
-        foreach (SteeringBehaviour behavior in listSteerings)
-            if (behavior.enabled)
-                kinematicFinal = behavior.GetSteering(this);
+        // foreach (SteeringBehaviour behavior in listSteerings)
+        //     if (behavior.enabled)
+        //         kinematicFinal = behavior.GetSteering(this);
         //// La cinemática de este SteeringBehaviour se tiene que combinar
         //// con las cinemáticas de los demás SteeringBehaviour.
         //// Debes usar kinematic con el árbitro desesado para combinar todos
@@ -83,11 +85,5 @@ public class AgentNPC : Agent
 
         // El resultado final se guarda para ser aplicado en el siguiente frame.
         this.steer = kinematicFinal;
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, OrientationToVector() + transform.position);
     }
 }

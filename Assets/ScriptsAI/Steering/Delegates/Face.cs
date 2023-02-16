@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Face : SteeringBehaviour
 {
     public Align align;
-    private Agent npcvtemp;
-    public Agent npcv;
+    private Agent npcVirtualTemp;
+    public Agent npcVirtual;
 
 
     void Start()
@@ -22,10 +20,10 @@ public class Face : SteeringBehaviour
         if (direction.magnitude == 0) return new Steering();
 
 
-        if (npcvtemp == null)
-            npcvtemp = Instantiate(npcv);
-        npcvtemp.Orientation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        align.target = npcvtemp;
+        if (npcVirtualTemp == null)
+            npcVirtualTemp = Instantiate(npcVirtual);
+        npcVirtualTemp.Orientation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        align.target = npcVirtualTemp;
 
         return align.GetSteering(agent);
     }

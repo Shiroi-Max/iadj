@@ -135,6 +135,11 @@ public class Bodi : MonoBehaviour
     {
         return new Vector3(-Mathf.Sin(_orientation), 0, Mathf.Cos(_orientation));
     }
+
+    public static Vector3 OrientationToVector(float orientation)
+    {
+        return new Vector3(-Mathf.Sin(orientation), 0, Mathf.Cos(orientation));
+    }
     //      Retorna un vector a partir de una orientación usando Z como primer eje
     // public Vector3 VectorHeading()  // Nombre alternativo
     //      Retorna un vector a partir de una orientación usando Z como primer eje

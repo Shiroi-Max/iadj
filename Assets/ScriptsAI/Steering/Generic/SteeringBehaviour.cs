@@ -34,7 +34,6 @@ public class SteeringBehaviour : MonoBehaviour
         return null;
     }
 
-
     protected virtual void OnGUI()
     {
         // Para la depuración te puede interesar que se muestre el nombre

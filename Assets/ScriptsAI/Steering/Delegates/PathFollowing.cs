@@ -5,8 +5,8 @@ using UnityEngine;
 public class PathFollowing : SteeringBehaviour
 {
     public Seek seek;
-    private Agent npcvtemp;
-    public Agent npcv;
+    private Agent npcVirtualTemp;
+    public Agent npcVirtual;
     public List<Vector3> nodes = new List<Vector3>();
     public float radius;
 
@@ -24,7 +24,6 @@ public class PathFollowing : SteeringBehaviour
 
     public override Steering GetSteering(Agent agent)
     {
-
         if (currentNode >= nodes.Count || currentNode < 0)
             return new Steering();
 
@@ -47,11 +46,11 @@ public class PathFollowing : SteeringBehaviour
                 break;
         }
 
-        if (npcvtemp == null)
-            npcvtemp = Instantiate(npcv);
+        if (npcVirtualTemp == null)
+            npcVirtualTemp = Instantiate(npcVirtual);
 
-        npcvtemp.Position = nodes[currentNode];
-        seek.target = npcvtemp;
+        npcVirtualTemp.Position = nodes[currentNode];
+        seek.target = npcVirtualTemp;
 
         return seek.GetSteering(agent);
     }

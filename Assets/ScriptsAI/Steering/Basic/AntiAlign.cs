@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AntiAlign : SteeringBehaviour
 {
     public Align align;
-    private Agent npcv;
+    private Agent npcVirtual;
 
     void Start()
     {
@@ -21,16 +19,16 @@ public class AntiAlign : SteeringBehaviour
             return steer;
         }
 
-        if (npcv == null)
-            npcv = Instantiate(target);
+        if (npcVirtual == null)
+            npcVirtual = Instantiate(target);
 
-        npcv.gameObject.SetActive(false);
+        npcVirtual.gameObject.SetActive(false);
         if (target.Orientation > 180)
-            npcv.Orientation = target.Orientation - 180;
+            npcVirtual.Orientation = target.Orientation - 180;
         else
-            npcv.Orientation = target.Orientation + 180;
+            npcVirtual.Orientation = target.Orientation + 180;
 
-        align.target = npcv;
+        align.target = npcVirtual;
         return align.GetSteering(agent);
     }
 }

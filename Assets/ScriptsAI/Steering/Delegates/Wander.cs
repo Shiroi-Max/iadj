@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Wander : SteeringBehaviour
@@ -9,8 +7,8 @@ public class Wander : SteeringBehaviour
     public float wanderRadius;
     public float wanderRate;
     private float wanderOrientation;
-    private Agent npcvtemp;
-    public Agent npcv;
+    private Agent npcVirtualTemp;
+    public Agent npcVirtual;
 
     void Start()
     {
@@ -21,13 +19,13 @@ public class Wander : SteeringBehaviour
     {
         wanderOrientation += Random.Range(-1f, 1f) * wanderRate;
 
-        if (npcvtemp == null)
-            npcvtemp = Instantiate(npcv);
+        if (npcVirtualTemp == null)
+            npcVirtualTemp = Instantiate(npcVirtual);
 
-        npcvtemp.Orientation = wanderOrientation + agent.Orientation;
-        npcvtemp.Position = agent.Position + wanderOffset * agent.OrientationToVector();
-        npcvtemp.Position += wanderRadius * npcvtemp.OrientationToVector();
-        face.target = npcvtemp;
+        npcVirtualTemp.Orientation = wanderOrientation + agent.Orientation;
+        npcVirtualTemp.Position = agent.Position + wanderOffset * agent.OrientationToVector();
+        npcVirtualTemp.Position += wanderRadius * npcVirtualTemp.OrientationToVector();
+        face.target = npcVirtualTemp;
 
         Steering steer = face.GetSteering(agent);
         steer.linear = agent.MaxAcceleration * agent.OrientationToVector();
