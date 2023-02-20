@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 [RequireComponent(typeof(AgentNPC))]
 public class SteeringBehaviour : MonoBehaviour
 {
-
     protected string nameSteering = "no steering";
     public Agent target = null;
 
@@ -18,7 +15,8 @@ public class SteeringBehaviour : MonoBehaviour
 
     public void NewTarget(Agent target)
     {
-        if (this.target != null) Destroy(this.target.gameObject);
+        if (this.target != null && this.target.CompareTag("NPC Virtual"))
+            Destroy(this.target.gameObject);
         this.target = target;
     }
 

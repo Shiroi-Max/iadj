@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class VisualSelector : MonoBehaviour
 {
-    public GameObject marcador;
-
+    public GameObject marker;
+    private string markerName;
     void Selected()
     {
-        GameObject marker = Instantiate(marcador, transform);
-        marker.transform.localPosition = Vector3.up * 1;
+        GameObject child = Instantiate(marker, transform);
+        child.transform.localPosition = Vector3.up * 1;
+        markerName = child.name;
     }
 
     void Deselected()
     {
-        GameObject marker = transform.GetChild(0).gameObject;
-
-        Destroy(marker);
+        GameObject child = transform.Find(markerName).gameObject;
+        if (child != null)
+            Destroy(child);
     }
 
 }
