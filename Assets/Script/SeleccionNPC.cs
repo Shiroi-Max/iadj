@@ -6,11 +6,14 @@ public class SeleccionNPC : MonoBehaviour
 {
     public ArrayList selectedUnits;
     public Agent npcVirtual;
+    public FormationManager formationManager;
+    private bool isFormation;
 
     // Start is called before the first frame update
     void Start()
     {
         selectedUnits = new ArrayList();
+        isFormation = false;
     }
 
     // Update is called once per frame
@@ -52,6 +55,13 @@ public class SeleccionNPC : MonoBehaviour
                 }
             }
         }
+        else if (Input.GetKey("f"))
+            if (!isFormation)
+                foreach (GameObject unit in selectedUnits)
+                    formationManager.AddCharacter(unit.GetComponent<Agent>());
+            else
+                foreach (GameObject unit in selectedUnits)
+                    formationManager.RemoveCharacter(unit.GetComponent<Agent>());
 
         void deseleccionarTodos()
         {

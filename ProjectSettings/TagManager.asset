@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Terrain
   - NPC
+  - NPC Virtual
   layers:
   - Default
   - TransparentFX
