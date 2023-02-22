@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class FormationPattern : MonoBehaviour
 {
+    [SerializeField]
     protected int numberSlots;
     protected Dictionary<int, Location> locations;
+    protected GridManager gridManager;
+
+    public void Start()
+    {
+
+    }
+
+    public void Update()
+    {
+
+    }
 
     public virtual Location GetDriftOffset(List<SlotAssignment> slotAssignments)
     {

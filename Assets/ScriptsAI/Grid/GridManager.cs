@@ -11,6 +11,7 @@ public class GridManager
     public int columns;
     public float size;
     public Vector3 origin;
+    public Vector3 leaderPosition;
 
     public Vector3 GetPositionPlane(Vector3 posGrid)
     {
@@ -24,5 +25,10 @@ public class GridManager
         int i = (int)((posPlane.x - origin.x) / size);
         int j = (int)((posPlane.z - origin.z) / size);
         return new Vector3(i, 0, j);
+    }
+
+    public Vector3 GetRelativePosition(Vector3 posGrid)
+    {
+        return posGrid - leaderPosition;
     }
 }
