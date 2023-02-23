@@ -6,6 +6,7 @@ public class Line : FormationPattern
 {
     public void Start()
     {
+        _namePattern = "Line";
         gridManager = new GridManager();
         gridManager.rows = 1;
         gridManager.columns = numberSlots;
@@ -16,28 +17,8 @@ public class Line : FormationPattern
         gridManager.leaderPosition = locations[0].position;
     }
 
-    public void Update()
-    {
-
-    }
-
-    public override Location GetDriftOffset(List<SlotAssignment> slotAssignments)
-    {
-        return new Location();
-    }
-
     public override Location GetSlotLocation(int slotNumber)
     {
         return locations[slotNumber];
-    }
-
-    public override bool SupportSlots(int slotCount)
-    {
-        return slotCount <= numberSlots;
-    }
-
-    public override int GetLeaderSlot()
-    {
-        return 0;
     }
 }

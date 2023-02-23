@@ -2,21 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeleccionNPC : MonoBehaviour
+public class SelectorNPC : MonoBehaviour
 {
-    public ArrayList selectedUnits;
-    public Agent npcVirtual;
+    public List<GameObject> selectedUnits;
     public FormationManager formationManager;
-    private bool isFormation;
+    public Agent npcVirtual;
 
-    // Start is called before the first frame update
     void Start()
     {
-        selectedUnits = new ArrayList();
-        isFormation = false;
+        selectedUnits = new List<GameObject>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonUp(0))
@@ -51,17 +47,21 @@ public class SeleccionNPC : MonoBehaviour
                     npc.transform.localPosition = v;
 
                     foreach (GameObject unit in selectedUnits)
+                    {
+                        if (unit.GetComponent<Brain>().status == Status.Formation)
+                            formationManager.BreakFormation(unit.GetComponent<AgentNPC>());
                         unit.SendMessage("NewTarget", npc);
+                    }
                 }
             }
         }
-        else if (Input.GetKey("f"))
-            if (!isFormation)
-                foreach (GameObject unit in selectedUnits)
-                    formationManager.AddCharacter(unit.GetComponent<Agent>());
-            else
-                foreach (GameObject unit in selectedUnits)
-                    formationManager.RemoveCharacter(unit.GetComponent<Agent>());
+        else if (Input.GetKey("f") && selectedUnits.Count > 1) // Tratar de modificar el proceso
+        {
+            List<AgentNPC> npcs = new List<AgentNPC>();
+            for (int i = 0; i < selectedUnits.Count; i++)
+                npcs.Add(selectedUnits[i].GetComponent<AgentNPC>());
+            formationManager.StartFormation(npcs);
+        }
 
         void deseleccionarTodos()
         {

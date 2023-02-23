@@ -4,24 +4,16 @@ using UnityEngine;
 
 public class FormationPattern : MonoBehaviour
 {
+    protected string _namePattern;
     [SerializeField]
     protected int numberSlots;
     protected Dictionary<int, Location> locations;
     protected GridManager gridManager;
 
-    public void Start()
+    public string NamePattern
     {
-
-    }
-
-    public void Update()
-    {
-
-    }
-
-    public virtual Location GetDriftOffset(List<SlotAssignment> slotAssignments)
-    {
-        return null;
+        get { return _namePattern; }
+        set { _namePattern = value; }
     }
 
     public virtual Location GetSlotLocation(int slotNumber)
@@ -29,12 +21,12 @@ public class FormationPattern : MonoBehaviour
         return null;
     }
 
-    public virtual bool SupportSlots(int slotCount)
+    public bool SupportSlots(int slotCount)
     {
-        return false;
+        return slotCount <= numberSlots;
     }
 
-    public virtual int GetLeaderSlot()
+    public int GetLeaderSlot()
     {
         return 0;
     }
