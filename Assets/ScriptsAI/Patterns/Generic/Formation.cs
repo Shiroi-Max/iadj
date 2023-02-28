@@ -46,7 +46,9 @@ public class Formation : MonoBehaviour
 
     public void Update()
     {
-        if (_leader == null && _pattern.GetLeaderSlot() == _slotNumber) return;
+        if (_leader == null || _pattern.GetLeaderSlot() == _slotNumber) return;
+
+        _pattern.OriginPosition(_leader.Position);
 
         float[,] orientationMatrix = { { Mathf.Cos(_leader.Orientation), -Mathf.Sin(_leader.Orientation) },
         { Mathf.Sin(_leader.Orientation), Mathf.Cos(_leader.Orientation) } };
@@ -57,7 +59,7 @@ public class Formation : MonoBehaviour
         Vector3 orientationVector = new Vector3((relativeLocation.position.x * orientationMatrix[0, 0]) +
         (relativeLocation.position.x * orientationMatrix[1, 0]), 0, (relativeLocation.position.z * orientationMatrix[0, 1]) +
         (relativeLocation.position.z * orientationMatrix[1, 1]));
-        location.position = orientationVector + _leader.Position;
+        location.position = _pattern.GetPositionPlane(relativeLocation.position);
 
         location.orientation = _leader.Orientation + relativeLocation.orientation;
 

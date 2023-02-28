@@ -49,6 +49,8 @@ public class AgentNPC : Agent
         // Orientation
         Acceleration = this.steer.linear; // cambia este valor si steer son aceleraciones
         AngularAcc = this.steer.angular;
+        if (this.GetComponent<Brain>().status == Status.Stopped)
+            return;
         Position = Position + Velocity * deltaTime; // Si steer fueran aceleraciones
         Orientation = Orientation + Rotation * deltaTime; // deberás cambiar las expresiones.
         Velocity = Velocity + Acceleration * deltaTime; // steer se interpreta como velocidades.

@@ -55,7 +55,7 @@ public class SelectorNPC : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKey("f") && selectedUnits.Count > 1) // Tratar de modificar el proceso
+        else if (Input.GetKeyUp("f") && selectedUnits.Count > 1) // Tratar de modificar el proceso
         {
             List<AgentNPC> npcs = new List<AgentNPC>();
             for (int i = 0; i < selectedUnits.Count; i++)

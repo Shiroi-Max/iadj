@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FormationManager : MonoBehaviour
@@ -21,6 +22,7 @@ public class FormationManager : MonoBehaviour
 
         indexList.Sort();
         indexList.Reverse();
+        indexList = indexList.Distinct().ToList();
         foreach (int index in indexList)
         {
             foreach (AgentNPC npc in inFormation[index])
@@ -34,7 +36,7 @@ public class FormationManager : MonoBehaviour
         if (!pattern.SupportSlots(npcs.Count)) return;
 
         for (int i = 1; i < npcs.Count; i++)
-            if (npcs[i].GetComponent<Formation>().Pattern.NamePattern.Equals(pattern.NamePattern))
+            if (!npcs[i].GetComponent<Formation>().Pattern.NamePattern.Equals(pattern.NamePattern))
                 return;
 
         for (int i = 0; i < npcs.Count; i++)
