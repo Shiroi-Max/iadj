@@ -6,7 +6,7 @@ public class AgentNPC : Agent
 {
     // Este será el steering final que se aplique al personaje.
     [SerializeField] protected Steering steer;
-    public Arbitrator arbitrator;
+    public ArbitratorManager arbitratorManager;
     // Todos los steering que tiene que calcular el agente.
     private List<SteeringBehaviour> listSteerings;
 
@@ -69,6 +69,7 @@ public class AgentNPC : Agent
 
         // Reseteamos el steering final.
         this.steer = new Steering();
+        Arbitrator arbitrator = arbitratorManager.Actual;
         kinematicFinal = arbitrator.getSteering(listSteerings, this);
 
         // Recorremos cada steering

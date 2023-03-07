@@ -43,9 +43,7 @@ public class FormationPattern : MonoBehaviour
 
     public void OriginPosition(Vector3 posPlane)
     {
-        // gridManager.origin.x = posPlane.x - gridManager.size / 2;
-        // gridManager.origin.z = posPlane.z - gridManager.size / 2;
-        gridManager.origin.x = posPlane.x;
-        gridManager.origin.z = posPlane.z;
+        gridManager.origin.x = posPlane.x - gridManager.size / 2;
+        gridManager.origin.z = posPlane.z - gridManager.size / 2;
     }
 }

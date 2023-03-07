@@ -58,4 +58,18 @@ public class FormationManager : MonoBehaviour
         if (index > -1)
             inFormation.RemoveAt(index);
     }
+
+    public void FollowFormation(AgentNPC leader)
+    {
+        foreach (List<AgentNPC> list in inFormation)
+        {
+            if (!list.Contains(leader)) continue;
+            foreach (AgentNPC npc in list)
+            {
+                if (npc == leader) continue;
+                npc.GetComponent<Brain>().FollowFormation(leader);
+            }
+            break;
+        }
+    }
 }

@@ -45,13 +45,17 @@ public class SelectorNPC : MonoBehaviour
                     Vector3 v = hitInfo.point;
                     v.y = 0;
                     npc.transform.localPosition = v;
-
-                    foreach (GameObject unit in selectedUnits)
-                    {
-                        if (unit.GetComponent<Brain>().status == Status.Formation)
-                            formationManager.BreakFormation(unit.GetComponent<AgentNPC>());
-                        unit.SendMessage("NewTarget", npc);
+                    if (selectedUnits.Count == 1 && (selectedUnits[0].GetComponent<Formation>().SlotNumber == selectedUnits[0].GetComponent<FormationPattern>().GetLeaderSlot())){
+                        formationManager.FollowFormation(selectedUnits[0].GetComponent<AgentNPC>());
+                        selectedUnits[0].SendMessage("NewTarget", npc);
                     }
+                    else
+                        foreach (GameObject unit in selectedUnits)
+                        {
+                            if (unit.GetComponent<Brain>().status == Status.Formation)
+                                formationManager.BreakFormation(unit.GetComponent<AgentNPC>());
+                            unit.SendMessage("NewTarget", npc);
+                        }
                 }
             }
         }
