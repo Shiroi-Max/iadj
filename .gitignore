@@ -12,8 +12,12 @@
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
-/[Aa]ssets/[Pp]refabs/
-/[Aa]ssets/[Ss]cenes/
+/[Aa]ssets/[Ee]valuación/
+/[Aa]ssets/[Pp]ráctica/[Pp]refabs/
+/[Aa]ssets/[Pp]ráctica/[Ss]cenes/
+/[Aa]ssets/[Pp]ráctica/[Mm]aterials/
+/[Aa]ssets/[Pp]ráctica/[Tt]extures/
+/[Aa]ssets/[Pp]ráctica/[Ss]ettings/
 /[Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
